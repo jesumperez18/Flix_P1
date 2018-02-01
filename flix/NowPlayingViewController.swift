@@ -7,16 +7,35 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class NowPlayingViewController: UIViewController, UITableViewDataSource{
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var movies : [[String: Any]] = []
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
+         refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
+        
         tableView.dataSource = self
         // Do any additional setup after loading the view.
+     
+        fetchMovies()
+        activityIndicator.stopAnimating()
+    }
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
+        fetchMovies()
+    }
+    
+    func fetchMovies()
+    {
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=7113d80fa3248ad7e79003f590358cea")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -31,11 +50,11 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource{
                 
                 self.movies = movies
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
                 
             }
         }
         task.resume()
-     
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
@@ -47,6 +66,11 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource{
         let overview = movie["overview"] as! String
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
+        
+        let posterPathString = movie["poster_path"] as! String
+        let baseUrlString = "https://image.tmdb.org/t/p/w500"
+        let posterUrl = URL(string: baseUrlString + posterPathString)!
+        cell.posterImageView.af_setImage(withURL: posterUrl)
         
         return cell
     }

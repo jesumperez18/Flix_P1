@@ -53,15 +53,21 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="overviewLabel" destination="NYW-gw-ZVU" id="tfd-Jy-dXl"/>
+                                            <outlet property="posterImageView" destination="k54-05-qPU" id="LUA-XD-EaP"/>
                                             <outlet property="titleLabel" destination="dbq-jH-nyi" id="0Sd-fI-2KI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="3eL-Sy-WrC">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="3eL-Sy-WrC" id="8fH-eg-cde"/>
                         <outlet property="tableView" destination="r3G-NJ-fFu" id="h22-8D-5Po"/>
                     </connections>
                 </viewController>
