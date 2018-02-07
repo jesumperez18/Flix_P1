@@ -17,6 +17,7 @@
 		5ACFF75A201FD85B00FC5EFD /* flixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFF759201FD85B00FC5EFD /* flixTests.swift */; };
 		5ACFF765201FD85B00FC5EFD /* flixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFF764201FD85B00FC5EFD /* flixUITests.swift */; };
 		5ACFF7752020031800FC5EFD /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFF7742020031800FC5EFD /* NowPlayingViewController.swift */; };
+		5AECB8092029118900F65DDD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AECB8082029118900F65DDD /* DetailViewController.swift */; };
 		C3EEE2091F8F37AE4586422B /* Pods_flixUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B96384044F5A723001A75831 /* Pods_flixUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		5ACFF764201FD85B00FC5EFD /* flixUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flixUITests.swift; sourceTree = "<group>"; };
 		5ACFF766201FD85B00FC5EFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5ACFF7742020031800FC5EFD /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
+		5AECB8082029118900F65DDD /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7CB84B2C4CC30B2431B96B8D /* Pods-flix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flix/Pods-flix.debug.xcconfig"; sourceTree = "<group>"; };
 		8C636568D2AD7A801E8C2987 /* Pods-flixTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flixTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flixTests/Pods-flixTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E5BADAF416ABD2CB800B126 /* Pods-flixUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flixUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flixUITests/Pods-flixUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,13 +141,13 @@
 		5ACFF743201FD85A00FC5EFD /* flix */ = {
 			isa = PBXGroup;
 			children = (
-				5ACFF7742020031800FC5EFD /* NowPlayingViewController.swift */,
+				5AECB807202910E600F65DDD /* Views */,
+				5AECB806202910D500F65DDD /* ViewControllers */,
 				5ACFF744201FD85A00FC5EFD /* AppDelegate.swift */,
 				5ACFF748201FD85B00FC5EFD /* Main.storyboard */,
 				5ACFF74B201FD85B00FC5EFD /* Assets.xcassets */,
 				5ACFF74D201FD85B00FC5EFD /* LaunchScreen.storyboard */,
 				5ACFF750201FD85B00FC5EFD /* Info.plist */,
-				5A1909C420227BA000CD11C0 /* MovieCell.swift */,
 			);
 			path = flix;
 			sourceTree = "<group>";
@@ -166,6 +168,23 @@
 				5ACFF766201FD85B00FC5EFD /* Info.plist */,
 			);
 			path = flixUITests;
+			sourceTree = "<group>";
+		};
+		5AECB806202910D500F65DDD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5ACFF7742020031800FC5EFD /* NowPlayingViewController.swift */,
+				5AECB8082029118900F65DDD /* DetailViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5AECB807202910E600F65DDD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5A1909C420227BA000CD11C0 /* MovieCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,6 +485,7 @@
 				5ACFF7752020031800FC5EFD /* NowPlayingViewController.swift in Sources */,
 				5ACFF745201FD85A00FC5EFD /* AppDelegate.swift in Sources */,
 				5A1909C520227BA000CD11C0 /* MovieCell.swift in Sources */,
+				5AECB8092029118900F65DDD /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
