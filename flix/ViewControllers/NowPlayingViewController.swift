@@ -13,7 +13,9 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource{
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
-    var movies : [[String: Any]] = []
+    //var movies : [[String: Any]] = []
+    
+    var movies: [Movie] = []
     var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
@@ -36,55 +38,37 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource{
     
     func fetchMovies()
     {
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=7113d80fa3248ad7e79003f590358cea")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // this will run when network request returns
-            if let error = error{
-                print(error.localizedDescription)
-            }else if let data = data{
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                //print(dataDictionary)
-                let movies = dataDictionary["results"] as! [[String:Any]]
-                
+        MovieApiManager().nowPlayingMovies { (movies: [Movie]?, error: Error?) in
+            if let movies = movies {
                 self.movies = movies
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
-                
             }
         }
-        task.resume()
+        
+       
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)as! MovieCell// Identifier
-        let movie = movies[indexPath.row]
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
-        cell.titleLabel.text = title
-        cell.overviewLabel.text = overview
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         
-        let posterPathString = movie["poster_path"] as! String
-        let baseUrlString = "https://image.tmdb.org/t/p/w500"
-        let posterUrl = URL(string: baseUrlString + posterPathString)!
-        cell.posterImageView.af_setImage(withURL: posterUrl)
+        cell.movie = movies[indexPath.row]
         
         return cell
+        
+        
+        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
-        if let indexPath = tableView.indexPath(for: cell){
-            let movie = movies[indexPath.row]
-            let detailViewController = segue.destination as! DetailViewController
-            detailViewController.movie = movie
-            
-            
-            
+        let vc = segue.destination as! DetailViewController
+        let senderCell = sender as! MovieCell
+        if let indexPath = tableView.indexPath(for: senderCell){
+            vc.movie = movies[indexPath.row]
         }
     }
+    
     
     
     
